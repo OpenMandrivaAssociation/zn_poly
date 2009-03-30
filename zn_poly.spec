@@ -3,7 +3,7 @@
 %define devstatic	%mklibname -d -s %{name}
 
 Name:		%{name}
-Group:		Science/Mathematics
+Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Polynomial arithmetic in Z/nZ[x]
 Version:	%{version}
