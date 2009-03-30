@@ -7,7 +7,7 @@ Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Polynomial arithmetic in Z/nZ[x]
 Version:	%{version}
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
 URL:		http://cims.nyu.edu/~harvey/zn_poly/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
