@@ -35,6 +35,7 @@ where n is any modulus that fits into an unsigned long.
 # options it doesn't know about.
 sed -i	-e 's|^ntl_include_dir.*|ntl_include_dir = options.ntl_prefix + "/NTL/include"|'	\
 	-e 's|" % prefix|" % ("%{buildroot}" + prefix)|'	\
+	-e 's|/lib"|/%{_lib}"|'					\
 	makemakefile.py
 /bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags}"
 
