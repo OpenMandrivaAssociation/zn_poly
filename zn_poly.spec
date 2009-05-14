@@ -7,7 +7,7 @@ Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Polynomial arithmetic in Z/nZ[x]
 Version:	%{version}
-Release:	%mkrel 3
+Release:	%mkrel 4
 Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
 URL:		http://cims.nyu.edu/~harvey/zn_poly/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -22,6 +22,7 @@ where n is any modulus that fits into an unsigned long.
 %package	-n %{devstatic}
 Group:		Development/C
 Summary:	Polynomial arithmetic in Z/nZ[x]
+Provides:	zn_poly-static-devel = %{version}-%{release}
 
 %description	-n %{devstatic}
 zn_poly is a C library for polynomial arithmetic in Z/nZ[x],
