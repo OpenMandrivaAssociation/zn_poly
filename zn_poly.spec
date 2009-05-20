@@ -7,7 +7,7 @@ Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Polynomial arithmetic in Z/nZ[x]
 Version:	%{version}
-Release:	%mkrel 4
+Release:	%mkrel 5
 Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
 URL:		http://cims.nyu.edu/~harvey/zn_poly/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -38,7 +38,7 @@ sed -i	-e 's|^ntl_include_dir.*|ntl_include_dir = options.ntl_prefix + "/NTL/inc
 	-e 's|" % prefix|" % ("%{buildroot}" + prefix)|'	\
 	-e 's|/lib"|/%{_lib}"|'					\
 	makemakefile.py
-/bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags}"
+/bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags} -fPIC"
 
 make
 
