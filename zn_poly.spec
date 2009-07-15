@@ -7,13 +7,15 @@ Group:		Sciences/Mathematics
 License:	GPLv2 or GPLv3
 Summary:	Polynomial arithmetic in Z/nZ[x]
 Version:	%{version}
-Release:	%mkrel 6
+Release:	%mkrel 7
 Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
 URL:		http://cims.nyu.edu/~harvey/zn_poly/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires:	gmp-devel
 BuildRequires:	ntl-devel
+
+Patch0:		zn_poly-0.9.patch
 
 %description
 zn_poly is a C library for polynomial arithmetic in Z/nZ[x],
@@ -30,6 +32,8 @@ where n is any modulus that fits into an unsigned long.
 
 %prep
 %setup -q
+
+%patch0	-p1
 
 %build
 # this script actually just calls makemakefile.py, and it doesn't like
