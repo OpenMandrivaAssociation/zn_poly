@@ -1,13 +1,13 @@
 %define name		zn_poly
 %define version		0.9
-%define devstatic	%mklibname -d -s %{name}
+%define devname		%mklibname -d %{name}
 
 Name:		%{name}
 Group:		Sciences/Mathematics
 License:	GPLv2 or GPLv3
 Summary:	Polynomial arithmetic in Z/nZ[x]
 Version:	%{version}
-Release:	%mkrel 7
+Release:	%mkrel 8
 Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
 URL:		http://cims.nyu.edu/~harvey/zn_poly/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -21,12 +21,13 @@ Patch0:		zn_poly-0.9.patch
 zn_poly is a C library for polynomial arithmetic in Z/nZ[x],
 where n is any modulus that fits into an unsigned long. 
 
-%package	-n %{devstatic}
+%package	-n %{devname}
 Group:		Development/C
 Summary:	Polynomial arithmetic in Z/nZ[x]
-Provides:	zn_poly-static-devel = %{version}-%{release}
+Obsoletes:	%mklibname -d -s %name
+Provides:	zn_poly-devel = %{version}-%{release}
 
-%description	-n %{devstatic}
+%description	-n %{devname}
 zn_poly is a C library for polynomial arithmetic in Z/nZ[x],
 where n is any modulus that fits into an unsigned long. 
 
@@ -44,7 +45,7 @@ sed -i	-e 's|^ntl_include_dir.*|ntl_include_dir = options.ntl_prefix + "/NTL/inc
 	makemakefile.py
 /bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags} -fPIC"
 
-make
+make libzn_poly-%{version}.so
 
 %install
 make install
@@ -52,7 +53,7 @@ make install
 %clean
 rm -rf %{buildroot}
 
-%files		-n %{devstatic}
+%files		-n %{devname}
 %defattr(-,root,root)
 %{_includedir}/*
 %{_libdir}/*
