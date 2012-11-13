@@ -1,0 +1,22 @@
+--- zn_poly-0.9/include/zn_poly.h.orig	2011-03-07 17:01:43.905571000 -0300
++++ zn_poly-0.9/include/zn_poly.h	2011-03-07 17:02:05.693571290 -0300
+@@ -69,7 +69,7 @@ zn_poly_version_string ();
+ /*
+    I get really sick of typing unsigned long.
+ */
+-typedef unsigned long  ulong;
++#define ulong unsigned long
+ 
+ 
+ #include "wide_arith.h"
+--- zn_poly-0.9/makemakefile.py.orig	2011-03-07 17:02:15.824571192 -0300
++++ zn_poly-0.9/makemakefile.py	2011-03-07 17:02:51.102571059 -0300
+@@ -160,7 +160,7 @@ print
+ print "install:"
+ print "\tmkdir -p %s/include/zn_poly" % prefix
+ print "\tmkdir -p %s/lib" % prefix
+-print "\tcp libzn_poly.a %s/lib" % prefix
++print "\tcp -fa libzn_poly* %s/lib" % prefix
+ print "\tcp include/zn_poly.h %s/include/zn_poly" % prefix
+ print "\tcp include/wide_arith.h %s/include/zn_poly" % prefix
+ print
