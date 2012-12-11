@@ -1,16 +1,13 @@
-%define name		zn_poly
-%define version		0.9
 %define devname		%mklibname -d %{name}
 
-Name:		%{name}
+Summary:	Polynomial arithmetic in Z/nZ[x]
+Name:		zn_poly
+Version:	0.9
+Release:	9
 Group:		Sciences/Mathematics
 License:	GPLv2 or GPLv3
-Summary:	Polynomial arithmetic in Z/nZ[x]
-Version:	%{version}
-Release:	%mkrel 8
 Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
 URL:		http://cims.nyu.edu/~harvey/zn_poly/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires:	gmp-devel
 BuildRequires:	ntl-devel
@@ -24,7 +21,6 @@ where n is any modulus that fits into an unsigned long.
 %package	-n %{devname}
 Group:		Development/C
 Summary:	Polynomial arithmetic in Z/nZ[x]
-Obsoletes:	%mklibname -d -s %name
 Provides:	zn_poly-devel = %{version}-%{release}
 
 %description	-n %{devname}
@@ -33,7 +29,6 @@ where n is any modulus that fits into an unsigned long.
 
 %prep
 %setup -q
-
 %patch0	-p1
 
 %build
@@ -50,11 +45,9 @@ make libzn_poly-%{version}.so
 %install
 make install
 
-%clean
-rm -rf %{buildroot}
-
-%files		-n %{devname}
-%defattr(-,root,root)
-%{_includedir}/*
-%{_libdir}/*
+%files -n %{devname}
 %doc doc/REFERENCES
+%{_includedir}/*
+%{_libdir}/*.so
+
+
