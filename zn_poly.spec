@@ -1,31 +1,33 @@
-%define devname		%mklibname -d %{name}
+%define old_devname	%mklibname -d %{name}
 
-Summary:	Polynomial arithmetic in Z/nZ[x]
-Name:		zn_poly
-Version:	0.9
-Release:	9
-Group:		Sciences/Mathematics
-License:	GPLv2 or GPLv3
-Source:		http://cims.nyu.edu/~harvey/zn_poly/releases/%{name}-%{version}.tar.gz
-URL:		http://cims.nyu.edu/~harvey/zn_poly/
-
-BuildRequires:	gmp-devel
-BuildRequires:	ntl-devel
+Name:           zn_poly
+Version:        0.9
+Release:        10
+Summary:        C library for polynomial arithmetic
+# see COPYING to see, which file has which license
+License:        (GPLv2 or GPLv3) and GPLv2+ and LGPLv2+
+URL:            http://cims.nyu.edu/~harvey/code/zn_poly/
+Source0:        http://cims.nyu.edu/~harvey/code/zn_poly/releases/zn_poly-%{version}.tar.gz
+Source1:        %{name}.rpmlintrc
+BuildRequires:  gmp-devel
+BuildRequires:  ntl-devel
+%py_requires -d
 
 Patch0:		zn_poly-0.9.patch
 
 %description
-zn_poly is a C library for polynomial arithmetic in Z/nZ[x],
-where n is any modulus that fits into an unsigned long. 
+zn_poly is a C library for polynomial arithmetic in Z/nZ[x], where n is
+any modulus that fits into an unsigned long. 
 
-%package	-n %{devname}
-Group:		Development/C
+%package	devel
 Summary:	Polynomial arithmetic in Z/nZ[x]
-Provides:	zn_poly-devel = %{version}-%{release}
+%rename %{old_devname}
 
-%description	-n %{devname}
-zn_poly is a C library for polynomial arithmetic in Z/nZ[x],
-where n is any modulus that fits into an unsigned long. 
+%description	devel
+zn_poly is a C library for polynomial arithmetic in Z/nZ[x], where n is
+any modulus that fits into an unsigned long. 
+
+This package contains the development files.
 
 %prep
 %setup -q
@@ -45,9 +47,17 @@ make libzn_poly-%{version}.so
 %install
 make install
 
-%files -n %{devname}
-%doc doc/REFERENCES
+%check
+make test
+./test/test all
+
+%files
+%doc COPYING gpl-?.0.txt
+%doc demo/bernoulli/bernoulli.c doc/REFERENCES
+%{_libdir}/libzn_poly-%{version}.so
+
+%files devel
 %{_includedir}/*
-%{_libdir}/*.so
+%{_libdir}/libzn_poly.so
 
 
