@@ -11,7 +11,9 @@ Source0:        http://cims.nyu.edu/~harvey/code/zn_poly/releases/zn_poly-%{vers
 Source1:        %{name}.rpmlintrc
 BuildRequires:  gmp-devel
 BuildRequires:  ntl-devel
+%ifnarch %{ix86}
 %py_requires -d
+%endif
 
 Patch0:		zn_poly-0.9.patch
 
