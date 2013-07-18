@@ -2,7 +2,7 @@
 
 Name:           zn_poly
 Version:        0.9
-Release:        10
+Release:        11
 Summary:        C library for polynomial arithmetic
 # see COPYING to see, which file has which license
 License:        (GPLv2 or GPLv3) and GPLv2+ and LGPLv2+
@@ -23,6 +23,7 @@ any modulus that fits into an unsigned long.
 
 %package	devel
 Summary:	Polynomial arithmetic in Z/nZ[x]
+Requires:       %{name} = %{EVRD}
 %rename %{old_devname}
 
 %description	devel
