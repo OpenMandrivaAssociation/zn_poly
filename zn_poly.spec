@@ -2,7 +2,7 @@
 
 Name:           zn_poly
 Version:        0.9
-Release:        11
+Release:        12
 Summary:        C library for polynomial arithmetic
 # see COPYING to see, which file has which license
 License:        (GPLv2 or GPLv3) and GPLv2+ and LGPLv2+
