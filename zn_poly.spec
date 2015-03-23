@@ -35,6 +35,7 @@ This package contains the development files.
 %prep
 %setup -q
 %patch0	-p1
+find . -name "*.py" |xargs 2to3 -w
 
 %build
 # this script actually just calls makemakefile.py, and it doesn't like
