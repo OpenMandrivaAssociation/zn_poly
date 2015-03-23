@@ -12,7 +12,7 @@ Source1:        %{name}.rpmlintrc
 BuildRequires:  gmp-devel
 BuildRequires:  ntl-devel
 %ifnarch %{ix86}
-%py_requires -d
+Requires: python
 %endif
 
 Patch0:		zn_poly-0.9.patch
