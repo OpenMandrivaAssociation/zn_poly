@@ -1,13 +1,13 @@
 %define old_devname	%mklibname -d %{name}
 
 Name:           zn_poly
-Version:        0.9
-Release:        12
+Version:        0.9.1
+Release:        1
 Summary:        C library for polynomial arithmetic
 # see COPYING to see, which file has which license
 License:        (GPLv2 or GPLv3) and GPLv2+ and LGPLv2+
 URL:            http://cims.nyu.edu/~harvey/code/zn_poly/
-Source0:        http://cims.nyu.edu/~harvey/code/zn_poly/releases/zn_poly-%{version}.tar.gz
+Source0:        https://gitlab.com/sagemath/zn_poly/-/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        %{name}.rpmlintrc
 BuildRequires:  gmp-devel
 BuildRequires:  ntl-devel
