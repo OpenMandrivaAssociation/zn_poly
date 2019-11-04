@@ -46,10 +46,10 @@ sed -i	-e 's|^ntl_include_dir.*|ntl_include_dir = options.ntl_prefix + "/NTL/inc
 	makemakefile.py
 /bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags} -fPIC"
 
-make libzn_poly-%{version}.so
+%make_build libzn_poly-%{version}.so
 
 %install
-make install
+%make_install
 
 %check
 make test
