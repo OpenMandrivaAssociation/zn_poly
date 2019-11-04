@@ -62,6 +62,6 @@ make test
 
 %files devel
 %{_includedir}/*
-%{_libdir}/libzn_poly.so
+#{_libdir}/libzn_poly.so
 
 
