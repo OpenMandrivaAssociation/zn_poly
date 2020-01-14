@@ -1,7 +1,7 @@
 %define old_devname	%mklibname -d %{name}
 
 Name:           zn_poly
-Version:        0.9.1
+Version:        0.9.2
 Release:        1
 Summary:        C library for polynomial arithmetic
 # see COPYING to see, which file has which license
