@@ -15,7 +15,7 @@ BuildRequires:  ntl-devel
 Requires: python
 %endif
 
-Patch0:		zn_poly-0.9.patch
+#Patch0:		zn_poly-0.9.patch
 
 %description
 zn_poly is a C library for polynomial arithmetic in Z/nZ[x], where n is
@@ -34,7 +34,7 @@ This package contains the development files.
 
 %prep
 %setup -q
-%patch0	-p1
+#patch0	-p1
 find . -name "*.py" |xargs 2to3 -w
 
 %build
