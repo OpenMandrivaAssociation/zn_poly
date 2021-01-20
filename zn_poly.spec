@@ -36,18 +36,11 @@ This package contains the development files.
 
 %prep
 %setup -q
-sed -i "s|typedef unsigned long  ulong;|\/\/typedef unsigned long  ulong;|g" include/zn_poly.h
- 
  
 %build
-%global ldflags %{ldflags} -fuse-ld=gold
-python3 makemakefile.py --cflags="%{optflags} -fPIC" --prefix=%{_prefix} \
-    --gmp-prefix=%{_prefix} \
-    --disable-tuning \
-    > makefile
- 
-%make_build all libzn_poly.so libzn_poly-%{version}.so LDFLAGS="$RPM_LD_FLAGS"
- 
+python makemakefile.py --prefix=/usr --cflags="$CFLAGS -fPIC" --cxxflags="$CXXFLAGS" --ldflags="$LDFLAGS" > makefile
+  make
+  make libzn_poly.so
  
 %install
 # install manually, because makefile does not honor DESTDIR
