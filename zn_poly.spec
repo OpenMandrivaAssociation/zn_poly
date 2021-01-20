@@ -1,3 +1,5 @@
+%define _disable_lto 1
+
 %define old_devname	%mklibname -d %{name}
 
 Name:           zn_poly
@@ -38,6 +40,7 @@ sed -i "s|typedef unsigned long  ulong;|\/\/typedef unsigned long  ulong;|g" inc
  
  
 %build
+%global ldflags %{ldflags} -fuse-ld=gold
 python3 makemakefile.py --cflags="%{optflags} -fPIC" --prefix=%{_prefix} \
     --gmp-prefix=%{_prefix} \
     --disable-tuning \
