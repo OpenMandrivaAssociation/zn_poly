@@ -1,7 +1,10 @@
+%define _disable_lto 1
+%global debug_package %{nil}
+
 %define old_devname	%mklibname -d %{name}
 
 Name:           zn_poly
-Version:        0.9.1
+Version:        0.9.2
 Release:        1
 Summary:        C library for polynomial arithmetic
 # see COPYING to see, which file has which license
@@ -15,7 +18,7 @@ BuildRequires:  ntl-devel
 Requires: python
 %endif
 
-Patch0:		zn_poly-0.9.patch
+#Patch0:		zn_poly-0.9.patch
 
 %description
 zn_poly is a C library for polynomial arithmetic in Z/nZ[x], where n is
@@ -34,22 +37,21 @@ This package contains the development files.
 
 %prep
 %setup -q
-%patch0	-p1
-find . -name "*.py" |xargs 2to3 -w
-
+ 
 %build
-# this script actually just calls makemakefile.py, and it doesn't like
-# options it doesn't know about.
-sed -i	-e 's|^ntl_include_dir.*|ntl_include_dir = options.ntl_prefix + "/NTL/include"|'	\
-	-e 's|" % prefix|" % ("%{buildroot}" + prefix)|'	\
-	-e 's|/lib"|/%{_lib}"|'					\
-	makemakefile.py
-/bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags} -fPIC"
-
-%make_build libzn_poly-%{version}.so
-
+python makemakefile.py --prefix=/usr --cflags="$CFLAGS -fPIC" --cxxflags="$CXXFLAGS" --ldflags="$LDFLAGS" > makefile
+  make
+  make libzn_poly.so
+ 
 %install
-%make_install
+# install manually, because makefile does not honor DESTDIR
+mkdir -p %{buildroot}%{_includedir}/zn_poly/
+mkdir -p %{buildroot}%{_libdir}
+cp -pv include/*.h %{buildroot}%{_includedir}/zn_poly/
+cp -pv libzn_poly.a %{buildroot}%{_libdir}
+cp -pv libzn_poly-%{version}.so %{buildroot}%{_libdir}
+ln -s libzn_poly-%{version}.so %{buildroot}%{_libdir}/libzn_poly-0.9.so
+ln -s libzn_poly-0.9.so %{buildroot}%{_libdir}/libzn_poly.so
 
 %check
 make test
@@ -63,5 +65,5 @@ make test
 %files devel
 %{_includedir}/*
 %{_libdir}/libzn_poly-0.9.so
-
-
+%{_libdir}/libzn_poly.so
+%{_libdir}/libzn_poly.a
