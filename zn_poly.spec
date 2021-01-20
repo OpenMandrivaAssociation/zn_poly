@@ -34,22 +34,27 @@ This package contains the development files.
 
 %prep
 %setup -q
-#patch0	-p1
-find . -name "*.py" |xargs 2to3 -w
-
+sed -i "s|typedef unsigned long  ulong;|\/\/typedef unsigned long  ulong;|g" include/zn_poly.h
+ 
+ 
 %build
-# this script actually just calls makemakefile.py, and it doesn't like
-# options it doesn't know about.
-sed -i	-e 's|^ntl_include_dir.*|ntl_include_dir = options.ntl_prefix + "/NTL/include"|'	\
-	-e 's|" % prefix|" % ("%{buildroot}" + prefix)|'	\
-	-e 's|/lib"|/%{_lib}"|'					\
-	makemakefile.py
-/bin/sh ./configure --prefix=%{_prefix} --cflags="%{optflags} -fPIC"
-
-%make_build libzn_poly-%{version}.so
-
+python3 makemakefile.py --cflags="%{optflags} -fPIC" --prefix=%{_prefix} \
+    --gmp-prefix=%{_prefix} \
+    --disable-tuning \
+    > makefile
+ 
+%make_build all libzn_poly.so libzn_poly-%{version}.so LDFLAGS="$RPM_LD_FLAGS"
+ 
+ 
 %install
-%make_install
+# install manually, because makefile does not honor DESTDIR
+mkdir -p %{buildroot}%{_includedir}/zn_poly/
+mkdir -p %{buildroot}%{_libdir}
+cp -pv include/*.h %{buildroot}%{_includedir}/zn_poly/
+cp -pv libzn_poly.a %{buildroot}%{_libdir}
+cp -pv libzn_poly-%{version}.so %{buildroot}%{_libdir}
+ln -s libzn_poly-%{version}.so %{buildroot}%{_libdir}/libzn_poly-0.9.so
+ln -s libzn_poly-0.9.so %{buildroot}%{_libdir}/libzn_poly.so
 
 %check
 make test
