@@ -1,4 +1,5 @@
 %define _disable_lto 1
+%global debug_package %{nil}
 
 %define old_devname	%mklibname -d %{name}
 
