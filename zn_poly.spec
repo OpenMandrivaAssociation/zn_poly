@@ -12,6 +12,7 @@ License:        (GPLv2 or GPLv3) and GPLv2+ and LGPLv2+
 URL:            https://cims.nyu.edu/~harvey/code/zn_poly/
 Source0:        https://gitlab.com/sagemath/zn_poly/-/archive/%{version}/%{name}-%{version}.tar.gz
 Source1:        %{name}.rpmlintrc
+BuildRequires:	make
 BuildRequires:  gmp-devel
 BuildRequires:  ntl-devel
 %ifnarch %{ix86}
